@@ -8,9 +8,9 @@ function randomPalette() {
     
     var h_1 = seed;
     var h_2 = h_1 + steps < maxDegrees ? h_1 + steps : h_1 + steps - maxDegrees;
-    var h_3 = h_1 + steps < maxDegrees ? h_2 + steps : h_2 + steps - maxDegrees;
-    var h_4 = h_1 + steps < maxDegrees ? h_3 + steps : h_3 + steps - maxDegrees;
-    var h_5 = h_1 + steps < maxDegrees ? h_4 + steps : h_4 + steps - maxDegrees;
+    var h_3 = h_2 + steps < maxDegrees ? h_2 + steps : h_2 + steps - maxDegrees;
+    var h_4 = h_3 + steps < maxDegrees ? h_3 + steps : h_3 + steps - maxDegrees;
+    var h_5 = h_4 + steps < maxDegrees ? h_4 + steps : h_4 + steps - maxDegrees;
     
     var hsl_color_1 = hslToRgb(h_1/maxDegrees, saturation, lightness);
     var hsl_color_2 = hslToRgb(h_2/maxDegrees, saturation, lightness);
@@ -30,13 +30,15 @@ function randomPalette() {
     $("#color4").css("background-color",color_4);
     $("#color5").css("background-color",color_5);
     
-    document.getElementById("css-rules").value =
-      ".website-background{ color: " + color_1 + ";}\n\n.element-text{ color: " + color_2 + ";}\n\n.element-border{ border-color: " + color_3 + ";}\n\n.element-background{ background-color: " + color_4 + ";}\n\n.header{ color: " + color_4 + ";}";
-    
-    console.log(color_1,color_2,color_3,color_4,color_5);
+    generateRules(color_1, color_2, color_3, color_4, color_5);
   }
   
-  function generateRules() {
+  function generateRules(color_1, color_2, color_3, color_4, color_5) {
+    document.getElementById("css-rules").value =
+      ".website-background{ color: " + color_1 + ";}\n\n.element-text{ color: " + color_2 + ";}\n\n.element-border{ border-color: " + color_3 + ";}\n\n.element-background{ background-color: " + color_4 + ";}\n\n.header{ color: " + color_4 + ";}";
+  }
+
+  function clearPalette(){
     document.getElementById("css-rules").value =
       ".website-background{ color: #FFFFFF;}\n\n.element-text{ color: #FFFFFF;}\n\n.element-border{ border-color: #FFFFFF;}\n\n.element-background{ background-color: #FFFFFF;}\n\n.header{ color: #FFFFFF;}";
     $("#color1").removeAttr( 'style' );
